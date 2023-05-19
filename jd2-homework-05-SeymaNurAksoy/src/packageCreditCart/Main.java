@@ -1,4 +1,5 @@
 package packageCreditCart;
+
 import java.text.DateFormat;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
@@ -11,11 +12,11 @@ public class Main {
 	public static void main(String[] args) {
 		try {
 			atm();
-			if(pay()) {
+			if (pay()) {
 				atm();
-				throw new SystemNotWorkingException("Sistemsel hata tekrar deneyiniz.");
+				throw new SystemNotWorkingException("Sistemsel hata tekrar deneyiniz lütfen.");
 			}
-			
+
 		} catch (SystemNotWorkingException e) {
 			System.out.println(e.getMessage());
 		}
@@ -23,7 +24,7 @@ public class Main {
 
 	public static void atm() throws SystemNotWorkingException {
 		Scanner scanner = new Scanner(System.in);
-		boolean bug=false;
+		boolean bug = false;
 		try {
 
 			System.out.print("Ödeme Tutarı: ");
@@ -58,21 +59,19 @@ public class Main {
 		} catch (PaymentException e) {
 			System.out.printf("%s hatalı alan: %s", e.getMessage(), e.getText());
 			System.out.println();
-			bug=true;
+			bug = true;
 			throw new SystemNotWorkingException("");
 		} catch (CodeInvalidException | CartNumberException | CartDateInvalidException e) {
-			bug=true;
+			bug = true;
 			System.out.println(e.getMessage());
 			throw new SystemNotWorkingException("");
-		}finally {
-			if(pay()) {
+		} finally {
+			if (pay()) {
 				atm();
 			}
-			if(bug) {
+			if (bug) {
 				atm();
 			}
-		}{
-			
 		}
 	}
 
